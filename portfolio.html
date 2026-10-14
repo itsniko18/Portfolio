@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nikkon Sengupta — Interaction Design Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-page: #ffffff;
+      --text-main: #000000;
+      --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --green-bosch: #4c7756;
+      --card-radius: 36px;
+      --beige-auroville: #F6F3EE;
+    }
+
+    html, body {
+      font-family: var(--font-family);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Container alignment for 1440px Figma grid */
+    .page-wrapper {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      background: #ffffff;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Single Global Sticky Top Navbar */
+    .top-navbar {
+      width: 100%;
+      height: 61px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-brand {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      cursor: pointer;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .nav-brand:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+      color: #000000;
+      cursor: pointer;
+      position: relative;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .nav-link:hover {
+      opacity: 0.6;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #000000;
+      border-radius: 2px;
+    }
+
+    /* Smooth View Transitions */
+    .view-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .view-section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================================
+       HOME PAGE
+       ======================================================== */
+    .home-intro-banner {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .home-intro-container {
+      width: 100%;
+      background: #ffffff;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .home-projects-section {
+      width: 100%;
+      background-color: var(--green-bosch);
+      padding: 70px 50px 80px 50px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 20px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: #ffffff;
+      border-radius: 0;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 962 / 914;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Single Global Footer */
+    .site-footer {
+      width: 100%;
+      height: 121px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px;
+      background: #ffffff;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .footer-contact {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: -0.2px;
+      color: #000000;
+    }
+
+    .footer-contact a {
+      text-decoration: underline;
+    }
+
+    .footer-linkedin {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+      color: #000000;
+    }
+
+    .footer-linkedin:hover {
+      text-decoration: underline;
+    }
+
+    /* ========================================================
+       AUROVILLE PAGE 2
+       ======================================================== */
+    .auroville-view {
+      background: #ffffff;
+      width: 100%;
+    }
+
+    .auroville-slice {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      line-height: 0;
+    }
+
+    /* AUROVILLE PAGE 4: Exact Figma Match (#F6F3EE Background) */
+    .deck-section-wrapper {
+      width: 100%;
+      background-color: var(--beige-auroville);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .deck-container {
+      width: 100%;
+      max-width: 1440px;
+      padding: 50px 50px 60px 50px;
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+
+    /* Paragraph matching Photo 3 exact left alignment with Card 1 */
+    .deck-intro-para {
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.29px;
+      -webkit-font-smoothing: antialiased;
+      color: #000000;
+      max-width: 597px;
+      margin-bottom: 45px;
+      text-align: left;
+    }
+
+    /* 5 Cards Row - All 5 Cards Visible by Default, Exact 23px Gap */
+    .cards-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 23px;
+      padding-bottom: 12px;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Card 3D Flip Container - Aspect-ratio based up to Figma 250px x 338px */
+    .card-item-3d {
+      flex: 1 1 calc((100% - 92px) / 5);
+      max-width: 250px;
+      aspect-ratio: 250 / 338;
+      height: auto;
+      -webkit-perspective: 1200px;
+      perspective: 1200px;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+
+    .card-flipper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.34, 1.25, 0.64, 1);
+    }
+
+    /* Hover effect: moves up smoothly */
+    .card-item-3d:hover .card-flipper {
+      transform: translateY(-16px);
+    }
+
+    /* Clicked / Flipped state */
+    .card-item-3d.flipped .card-flipper {
+      transform: rotateY(180deg) translateY(-16px);
+    }
+
+    .card-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-face-front {
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+
+    .card-face-back {
+      z-index: 1;
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+      background: transparent;
+    }
+
+    .card-item-3d.flipped .card-face-front {
+      z-index: 1;
+    }
+
+    .card-item-3d.flipped .card-face-back {
+      z-index: 2;
+    }
+
+    .card-face img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Dynamic Rules & Description Section */
+    .rules-panel {
+      width: 100%;
+      min-height: 240px;
+      border-radius: 0;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.4s ease;
+      background-color: #4f3019;
+      color: #ffffff;
+      margin-top: 40px;
+    }
+
+    .rules-left-bar {
+      width: 18px;
+      flex-shrink: 0;
+      background-color: transparent;
+      transition: background-color 0.4s ease;
+    }
+
+    .rules-content {
+      flex: 1;
+      padding: 42px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      transition: color 0.3s ease;
+    }
+
+    .rules-badge {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      line-height: 1.4;
+      text-transform: none;
+      opacity: 0.95;
+    }
+
+    .rules-desc {
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.288px;
+      font-feature-settings: "ss04" 1, "salt" 1;
+      -webkit-font-smoothing: antialiased;
+      max-width: 900px;
+      white-space: pre-line;
+    }
+
+    /* Default brown state */
+    .rules-panel.theme-default {
+      background-color: #4f3019;
+      color: #ffffff;
+    }
+    .rules-panel.theme-default .rules-left-bar {
+      background-color: #4f3019;
+    }
+
+    /* Quiz Card State (Yellow) */
+    .rules-panel.theme-quiz {
+      background-color: #FFF2B5;
+      color: #000000;
+    }
+    .rules-panel.theme-quiz .rules-left-bar {
+      background-color: #FFE26C;
+    }
+
+    /* Fact Card State (Blue) */
+    .rules-panel.theme-fact {
+      background-color: #D1F3FF;
+      color: #000000;
+    }
+    .rules-panel.theme-fact .rules-left-bar {
+      background-color: #8DE0FF;
+    }
+
+    /* Talk Card State (Pink) */
+    .rules-panel.theme-talk {
+      background-color: #FCD5EE;
+      color: #000000;
+    }
+    .rules-panel.theme-talk .rules-left-bar {
+      background-color: #F7ABD8;
+    }
+
+    /* Action Card State (Orange) */
+    .rules-panel.theme-action {
+      background-color: #FFD1A6;
+      color: #000000;
+    }
+    .rules-panel.theme-action .rules-left-bar {
+      background-color: #FF9A47;
+    }
+
+    /* Group Card State (Green) */
+    .rules-panel.theme-group {
+      background-color: #D5FBD4;
+      color: #000000;
+    }
+    .rules-panel.theme-group .rules-left-bar {
+      background-color: #95F693;
+    }
+
+    /* ========================================================
+       CPC PAGE 2 (COMMUNITY PALLIATIVE CARE)
+       ======================================================== */
+    .cpc-view {
+      background: var(--green-bosch);
+      width: 100%;
+    }
+
+    .project-full-frame {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .cpc-middle-section {
+      width: 100%;
+      min-height: 681px;
+      background-color: var(--beige-auroville);
+      color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cpc-middle-container {
+      width: 100%;
+      max-width: 1440px;
+      min-height: 681px;
+      padding: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 76px;
+      box-sizing: border-box;
+    }
+
+    .cpc-gif-container {
+      width: 458px;
+      height: 581px;
+      max-width: 458px;
+      aspect-ratio: 458 / 581;
+      flex-shrink: 0;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      background: #ffffff;
+      position: relative;
+    }
+
+    .cpc-gif-img {
+      width: 100%;
+      height: 111.3%;
+      object-fit: cover;
+      object-position: center top;
+      margin-top: -5.7%;
+      display: block;
+    }
+
+    .cpc-text-container {
+      width: 100%;
+      max-width: 650px;
+      flex: 0 1 650px;
+    }
+
+    .cpc-story-desc {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      letter-spacing: 0.29px;
+      -webkit-font-smoothing: antialiased;
+      color: #000000;
+      margin: 0;
+    }
+
+    
+    /* CPC Bottom Section: Frame 130 matching exact Figma update */
+    .cpc-bottom-section {
+      width: 100%;
+      background-color: var(--green-bosch);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 40px;
+    }
+
+    .cpc-strip-story-container {
+      width: 100%;
+      max-width: 1205px;
+      padding: 24px 50px 10px 50px;
+      box-sizing: border-box;
+    }
+
+    .cpc-strip-story-desc {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      letter-spacing: 0.29px;
+      -webkit-font-smoothing: antialiased;
+      color: #ffffff;
+      margin: 0;
+      text-align: left;
+    }
+  
+    /* ========================================================
+       IAIM PAGE 3 FINAL (PANCHAKARMA)
+       ======================================================== */
+    .iaim-view {
+      background: #ffffff;
+      width: 100%;
+    }
+
+    .iaim-pamphlets-section {
+      width: 100%;
+      background-color: var(--beige-auroville);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .iaim-pamphlets-container {
+      width: 100%;
+      max-width: 1440px;
+      padding: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
+    .iaim-pamphlets-text {
+      width: 517px;
+      max-width: 42%;
+      flex-shrink: 0;
+    }
+
+    .iaim-pamphlet-title {
+      font-family: var(--font-family);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 32px;
+      margin-bottom: 20px;
+      color: #000000;
+      letter-spacing: -0.2px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .iaim-pamphlet-body {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 20px;
+      color: #000000;
+      margin-bottom: 20px;
+      letter-spacing: 0.29px;
+      -webkit-font-smoothing: antialiased;
+      max-width: 511px;
+    }
+
+    .iaim-pamphlet-body:last-child {
+      margin-bottom: 0;
+    }
+
+    .iaim-pamphlets-gifs {
+      display: flex;
+      gap: 0;
+      align-items: center;
+      width: 813px;
+      max-width: 58%;
+      aspect-ratio: 813 / 674;
+      flex-shrink: 0;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .iaim-gif-card {
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    .iaim-gif-card.frame-136 img {
+      position: absolute;
+      left: 0;
+      top: -4.5%;
+      width: 105%;
+      height: 109%;
+      object-fit: cover;
+      object-position: right center;
+      display: block;
+    }
+
+    .iaim-gif-card.frame-137 img {
+      position: absolute;
+      left: 0;
+      top: -3.56%;
+      width: 100%;
+      height: 107.12%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ========================================================
+       INTERLUDE PAGE 2
+       ======================================================== */
+    .interlude-view {
+      background: var(--green-bosch);
+      width: 100%;
+    }
+
+    /* Responsive Guard to Prevent Any Horizontal Scrolling */
+    @media (max-width: 1440px) {
+      .top-navbar {
+        padding: 0 30px;
+      }
+      .home-projects-section,
+      .deck-section-wrapper,
+      .cpc-middle-section,
+      .iaim-pamphlets-section,
+      .site-footer {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .cpc-middle-section,
+      .iaim-pamphlets-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cpc-gif-container {
+        max-width: 100%;
+      }
+      .iaim-pamphlets-text {
+        width: 100%;
+      }
+      .iaim-pamphlets-gifs {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Single Sticky Top Navbar (Only one on all pages) -->
+    <header class="top-navbar" id="mainNavbar">
+      <div class="nav-brand" onclick="navigateTo('home')" title="Back to Home">
+        <span>NIKKON SENGUPTA</span>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-link active" id="navHomeBtn" onclick="navigateTo('home')">HOME</button>
+        <button class="nav-link" id="navProjectsBtn" onclick="scrollToProjects()">PROJECTS</button>
+        <button class="nav-link" id="navContactBtn" onclick="scrollToContact()">CONTACT</button>
+      </nav>
+    </header>
+
+    <!-- ========================================================
+         VIEW 1: HOME (Exact Figma Order)
+         ======================================================== -->
+    <main class="view-section active" id="view-home">
+      <!-- Intro Section -->
+      <section class="home-intro-container">
+        <img src="portfolio_assets/home_intro.png" alt="Nikkon Sengupta Intro" class="home-intro-banner">
+      </section>
+
+      <!-- ALL PROJECTS Grid Section (Row 1: Auroville, CPC | Row 2: IAIM, Interlude) -->
+      <section class="home-projects-section" id="projectsSection">
+        <div class="projects-grid">
+          <!-- Project 1: Auroville Women’s Livelihood (Row 1, Col 1) -->
+          <div class="project-card" onclick="navigateTo('auroville')" title="Open Auroville project with interactive cards">
+            <img src="portfolio_assets/project_card_70_44.png" alt="Exploring How Auroville Fosters Women’s Livelihood and Awareness">
+          </div>
+
+          <!-- Project 2: CPC Palliative Care (Row 1, Col 2) -->
+          <div class="project-card" onclick="navigateTo('cpc')" title="Open Community Palliative Care project">
+            <img src="portfolio_assets/project_card_70_48.png" alt="System Understanding on Community Palliative Care">
+          </div>
+
+          <!-- Project 3: IAIM Healthcare Center (Row 2, Col 1) -->
+          <div class="project-card" onclick="navigateTo('iaim')" title="Open Panchakarma Service Design project">
+            <img src="portfolio_assets/project_card_70_52.png" alt="Panchakarma Service Design at I-AIM Healthcare Center">
+          </div>
+
+          <!-- Project 4: Interlude Material Exploration (Row 2, Col 2) -->
+          <div class="project-card" onclick="navigateTo('interlude')" title="Open Thoughts I Keep Untangling project">
+            <img src="portfolio_assets/thoughts_untangling_user.png" alt="Thoughts I keep Untangling: A Material Exploration">
+          </div>
+        </div>
+      </section>
+
+      <!-- Single Site Footer -->
+      <footer class="site-footer" id="contactSection">
+        <div class="footer-contact">
+          CONTACT : <a href="mailto:senguptanikkon@gmail.com">senguptanikkon@gmail.com</a>
+        </div>
+        <a href="https://www.linkedin.com/in/nikkon-sengupta-21b724235/" target="_blank" rel="noopener noreferrer" class="footer-linkedin">
+          LINKEDIN
+        </a>
+      </footer>
+    </main>
+
+
+    <!-- ========================================================
+         VIEW 2: AUROVILLE PAGE 2
+         ======================================================== -->
+    <article class="view-section auroville-view" id="view-auroville">
+      <!-- Auroville Slice 1: Intro Frame 1 & Skills -->
+      <img src="portfolio_assets/slice_2_63.png" alt="Auroville Project Overview and Ethnographic Research" class="auroville-slice">
+
+      <!-- Auroville Slice 2: Frame 3 Card Game Photo & Quote -->
+      <img src="portfolio_assets/slice_2_77.png" alt="Auroville Card Game Development" class="auroville-slice">
+
+      <!-- ========================================================
+           AUROVILLE PAGE 4: EXACT FIGMA & 3RD PHOTO MATCH
+           ======================================================== -->
+      <section class="deck-section-wrapper" id="deckSection">
+        <div class="deck-container">
+          <!-- Text left-aligned with Card 1 (Quiz) -->
+          <p class="deck-intro-para">
+            The cards consist of Q/A and information about menstrual health, as well as coming-of-age prompts to act as cushioning questions to make them laugh and get comfortable, and to hold their attention long enough, for when the real questions arrive.
+          </p>
+
+          <!-- 5 Cards Row (Exact Match to 3rd Photo) -->
+          <div class="cards-row">
+            <!-- 1. QUIZ CARD (Yellow) -->
+            <div class="card-item-3d" id="card-quiz"
+                 data-type="quiz"
+                 data-badge="Card Type 1 of 5"
+                 data-desc="Knowledge-based questions about menstrual health facts — chosen to act as an icebreaker."
+                 title="Click to flip card">
+              <div class="card-flipper">
+                <div class="card-face card-face-front">
+                  <img src="portfolio_assets/card_2_85.png" alt="Quiz Card Front">
+                </div>
+                <div class="card-face card-face-back">
+                  <img src="portfolio_assets/card_10_98.png" alt="Quiz Card Back Prompt">
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. FACT CARD (Blue) -->
+            <div class="card-item-3d" id="card-fact"
+                 data-type="fact"
+                 data-badge="Card Type 2 of 5"
+                 data-desc="Evidence-based health information in a true/false format to correct misconceptions."
+                 title="Click to flip card">
+              <div class="card-flipper">
+                <div class="card-face card-face-front">
+                  <img src="portfolio_assets/card_2_86.png" alt="Fact Card Front">
+                </div>
+                <div class="card-face card-face-back">
+                  <img src="portfolio_assets/card_12_132.png" alt="Fact Card Back Prompt">
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. TALK CARD (Pink) -->
+            <div class="card-item-3d" id="card-talk"
+                 data-type="talk"
+                 data-badge="Card Type 3 of 5"
+                 data-desc="Conversation prompts that open space for sharing personal experiences comfortably."
+                 title="Click to flip card">
+              <div class="card-flipper">
+                <div class="card-face card-face-front">
+                  <img src="portfolio_assets/card_2_87.png" alt="Talk Card Front">
+                </div>
+                <div class="card-face card-face-back">
+                  <img src="portfolio_assets/card_12_164.png" alt="Talk Card Back Prompt">
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. ACTION CARD (Orange) -->
+            <div class="card-item-3d" id="card-action"
+                 data-type="action"
+                 data-badge="Card Type 4 of 5"
+                 data-desc="Physical or creative activities that break the ice and build comfort around the topic."
+                 title="Click to flip card">
+              <div class="card-flipper">
+                <div class="card-face card-face-front">
+                  <img src="portfolio_assets/card_2_88.png" alt="Action Card Front">
+                </div>
+                <div class="card-face card-face-back">
+                  <img src="portfolio_assets/card_2_265.png" alt="Action Card Back Prompt">
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. GROUP CARD (Green) -->
+            <div class="card-item-3d" id="card-group"
+                 data-type="group"
+                 data-badge="Card Type 5 of 5"
+                 data-desc="Collaborative challenges that build community and shared learning — earns a bonus token if everyone participates."
+                 title="Click to flip card">
+              <div class="card-flipper">
+                <div class="card-face card-face-front">
+                  <img src="portfolio_assets/card_2_89.png" alt="Group Card Front">
+                </div>
+                <div class="card-face card-face-back">
+                  <img src="portfolio_assets/card_12_232.png" alt="Group Card Back Prompt">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Rules Panel -->
+          <div class="rules-panel theme-default" id="rulesPanel">
+            <div class="rules-left-bar" id="rulesLeftBar"></div>
+            <div class="rules-content">
+              <div class="rules-badge" id="rulesBadge">How to Play</div>
+              <div class="rules-desc" id="rulesDesc">Set Up: Stack the 5 types of cards separately. Keep the dice and timer in the center.
+Start: The youngest rolls the dice first. 1=Quiz, 2=Fact, 3=Talk, 4=Action, 5=Group, 6=Player's Choice.
+Play: Draw a card and follow the instruction within 1 minute to earn a point.
+Win: The player with the most points wins!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Auroville Slice 4: Field Documentation Photos -->
+      <img src="portfolio_assets/slice_2_93.png" alt="Auroville Field Documentation and Eco-sisterhood quotes" class="auroville-slice">
+
+      <!-- Single Clean Footer (Upper slice_2_106 footer removed) -->
+      <footer class="site-footer">
+        <div class="footer-contact">
+          CONTACT : <a href="mailto:senguptanikkon@gmail.com">senguptanikkon@gmail.com</a>
+        </div>
+        <a href="https://www.linkedin.com/in/nikkon-sengupta-21b724235/" target="_blank" rel="noopener noreferrer" class="footer-linkedin">
+          LINKEDIN
+        </a>
+      </footer>
+    </article>
+
+
+    <!-- ========================================================
+         VIEW 3: CPC PAGE 2 (COMMUNITY PALLIATIVE CARE)
+         ======================================================== -->
+    <article class="view-section cpc-view" id="view-cpc">
+      <!-- Top Section (Lower navbar cropped out; all 6 photos completely visible without sideways scrolling) -->
+      <img src="portfolio_assets/cpc_top_slice_clean.png" alt="Community Palliative Care Study and 6 Field Photos" class="project-full-frame">
+
+      <!-- Middle Section: Meet the Care Team Animated GIF (Photo 3) + Story Description -->
+      <section class="cpc-middle-section">
+        <div class="cpc-middle-container">
+          <div class="cpc-gif-container">
+            <img src="portfolio_assets/cpc_care_team_figma.gif" alt="Meet the Care Team Accordion Animation" class="cpc-gif-img">
+          </div>
+          <div class="cpc-text-container">
+            <p class="cpc-story-desc">
+              With my group, I created 4 accordions, where the 12 care scenarios (the houses that we visited during the field visit) were merged into 4 care stories. The story was curated in such a way that it focused on unfolding the inner workings of the care system - showing how the care team works throughout the day.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Section: Frame 130 Comic Strip + Story Description (Updated matching Figma Photo 3) -->
+      <section class="cpc-bottom-section">
+        <img src="portfolio_assets/cpc_frame_130_clean.png" alt="Care Scenarios Story Strip" class="project-full-frame">
+        <div class="cpc-strip-story-container">
+          <p class="cpc-strip-story-desc">
+            The story revolves around the work that the the work of the care team, their interactions with the families of care seekers, the infrastructure and how the gram panchayat worked to support the care team.  We aimed to show mainly the backstage actions and how the work was intimate and personal, and not just professional for the people giving and receiving the care.
+          </p>
+        </div>
+      </section>
+
+      <!-- Single Clean Footer -->
+      <footer class="site-footer">
+        <div class="footer-contact">
+          CONTACT : <a href="mailto:senguptanikkon@gmail.com">senguptanikkon@gmail.com</a>
+        </div>
+        <a href="https://www.linkedin.com/in/nikkon-sengupta-21b724235/" target="_blank" rel="noopener noreferrer" class="footer-linkedin">
+          LINKEDIN
+        </a>
+      </footer>
+    </article>
+
+
+    <!-- ========================================================
+         VIEW 4: IAIM PAGE 3 FINAL (PANCHAKARMA)
+         ======================================================== -->
+    <article class="view-section iaim-view" id="view-iaim">
+      <!-- Top Section (Lower navbar cropped out) -->
+      <img src="portfolio_assets/iaim_page_1_clean.png" alt="Panchakarma Service Design Overview and Field Documentation" class="project-full-frame">
+
+      <!-- Middle Section: Treatment Pamphlets with Animated GIFs (Photo 1) -->
+      <section class="iaim-pamphlets-section">
+        <div class="iaim-pamphlets-container">
+          <div class="iaim-pamphlets-text">
+            <h2 class="iaim-pamphlet-title">Panchakarma Treatment Pamphlet</h2>
+            <p class="iaim-pamphlet-body">
+              A pamphlet that clearly explains the Panchakarma therapy in a simple way including the protocols, purpose of each treatment, how it is done, and the oils used.
+            </p>
+            <p class="iaim-pamphlet-body">
+              It focuses more on visuals, such as illustrations of the massage process, and uses less text so that patients can quickly understand the information without feeling overwhelmed.
+            </p>
+          </div>
+          <div class="iaim-pamphlets-gifs">
+            <div class="iaim-gif-card frame-136">
+              <img src="portfolio_assets/iaim_pamphlet1_figma.gif" alt="Panchakarma Treatment Protocol Animation" class="iaim-gif-media-1">
+            </div>
+            <div class="iaim-gif-card frame-137">
+              <img src="portfolio_assets/iaim_pamphlet2_figma.gif" alt="Nasyam Panchakarma Treatment Animation" class="iaim-gif-media-2">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Section (Upper baked-in footer cropped out) -->
+      <img src="portfolio_assets/iaim_page_3_clean.png" alt="Panchakarma Service Delivery Outcome and System Flow" class="project-full-frame">
+
+      <!-- Single Clean Footer -->
+      <footer class="site-footer">
+        <div class="footer-contact">
+          CONTACT : <a href="mailto:senguptanikkon@gmail.com">senguptanikkon@gmail.com</a>
+        </div>
+        <a href="https://www.linkedin.com/in/nikkon-sengupta-21b724235/" target="_blank" rel="noopener noreferrer" class="footer-linkedin">
+          LINKEDIN
+        </a>
+      </footer>
+    </article>
+
+
+    <!-- ========================================================
+         VIEW 5: INTERLUDE PAGE 2
+         ======================================================== -->
+    <article class="view-section interlude-view" id="view-interlude">
+      <!-- Full Content (Lower navbar cropped out & upper footer cropped out) -->
+      <img src="portfolio_assets/interlude_clean.png" alt="Thoughts I Keep Untangling: A Material Exploration" class="project-full-frame">
+
+      <!-- Single Clean Footer -->
+      <footer class="site-footer">
+        <div class="footer-contact">
+          CONTACT : <a href="mailto:senguptanikkon@gmail.com">senguptanikkon@gmail.com</a>
+        </div>
+        <a href="https://www.linkedin.com/in/nikkon-sengupta-21b724235/" target="_blank" rel="noopener noreferrer" class="footer-linkedin">
+          LINKEDIN
+        </a>
+      </footer>
+    </article>
+
+  </div>
+
+  <script>
+    // State management
+    const DEFAULT_RULES = {
+      badge: 'How to Play',
+      desc: 'Set Up: Stack the 5 types of cards separately. Keep the dice and timer in the center.\nStart: The youngest rolls the dice first. 1=Quiz, 2=Fact, 3=Talk, 4=Action, 5=Group, 6=Player\'s Choice.\nPlay: Draw a card and follow the instruction within 1 minute to earn a point.\nWin: The player with the most points wins!',
+      theme: 'theme-default'
+    };
+
+    let activeFlippedCard = null;
+
+    // View Navigation with smooth animation and auto-scroll
+    function navigateTo(viewId) {
+      window.location.hash = viewId;
+
+      const views = document.querySelectorAll('.view-section');
+      const currentActive = document.querySelector('.view-section.active');
+      const target = document.getElementById('view-' + viewId);
+
+      if (!target) return;
+
+      if (currentActive && currentActive !== target) {
+        currentActive.style.opacity = '0';
+        currentActive.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          views.forEach(v => v.classList.remove('active'));
+          target.classList.add('active');
+          // Trigger reflow
+          void target.offsetWidth;
+          target.style.opacity = '1';
+          target.style.transform = 'translateY(0)';
+        }, 180);
+      } else {
+        views.forEach(v => v.classList.remove('active'));
+        target.classList.add('active');
+        void target.offsetWidth;
+        target.style.opacity = '1';
+        target.style.transform = 'translateY(0)';
+      }
+
+      // Update nav link indicator
+      const homeBtn = document.getElementById('navHomeBtn');
+      if (viewId === 'home') {
+        homeBtn.classList.add('active');
+      } else {
+        homeBtn.classList.remove('active');
+      }
+
+      // Smooth scroll to top of page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToProjects() {
+      if (!document.getElementById('view-home').classList.contains('active')) {
+        navigateTo('home');
+        setTimeout(() => {
+          const el = document.getElementById('projectsSection');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 220);
+      } else {
+        const el = document.getElementById('projectsSection');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function scrollToContact() {
+      const activeView = document.querySelector('.view-section.active');
+      const footer = (activeView && activeView.querySelector('.site-footer')) || document.querySelector('.site-footer');
+      if (footer) {
+        const navEl = document.getElementById('mainNavbar');
+        const navHeight = navEl ? navEl.offsetHeight : 0;
+        const targetY = footer.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth'
+        });
+      } else {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Rules Box Update
+    function updateRules(badge, desc, themeClass) {
+      const panel = document.getElementById('rulesPanel');
+      const badgeEl = document.getElementById('rulesBadge');
+      const descEl = document.getElementById('rulesDesc');
+
+      if (!panel || !badgeEl || !descEl) return;
+
+      panel.className = 'rules-panel ' + themeClass;
+      badgeEl.textContent = badge;
+      descEl.textContent = desc;
+    }
+
+    function resetRulesToDefault() {
+      if (activeFlippedCard) {
+        const type = activeFlippedCard.getAttribute('data-type');
+        const badge = activeFlippedCard.getAttribute('data-badge');
+        const desc = activeFlippedCard.getAttribute('data-desc');
+        updateRules(badge, desc, 'theme-' + type);
+      } else {
+        updateRules(DEFAULT_RULES.badge, DEFAULT_RULES.desc, DEFAULT_RULES.theme);
+      }
+    }
+
+    // Initialize Card Deck Interactions
+    function initCardDeck() {
+      const cards = document.querySelectorAll('.card-item-3d');
+
+      cards.forEach(card => {
+        const type = card.getAttribute('data-type');
+        const badge = card.getAttribute('data-badge');
+        const desc = card.getAttribute('data-desc');
+
+        // Hover In
+        card.addEventListener('mouseenter', () => {
+          updateRules(badge, desc, 'theme-' + type);
+        });
+
+        // Hover Out
+        card.addEventListener('mouseleave', () => {
+          resetRulesToDefault();
+        });
+
+        // Click to Flip
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isFlipped = card.classList.contains('flipped');
+
+          if (isFlipped) {
+            // Unflip
+            card.classList.remove('flipped');
+            if (activeFlippedCard === card) {
+              activeFlippedCard = null;
+            }
+            resetRulesToDefault();
+          } else {
+            // Unflip any previously flipped card
+            cards.forEach(c => c.classList.remove('flipped'));
+
+            // Flip this card
+            card.classList.add('flipped');
+            activeFlippedCard = card;
+            updateRules(badge, desc, 'theme-' + type);
+          }
+        });
+      });
+
+      // Clicking anywhere outside cards un-flips any flipped card
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.card-item-3d') && activeFlippedCard) {
+          activeFlippedCard.classList.remove('flipped');
+          activeFlippedCard = null;
+          resetRulesToDefault();
+        }
+      });
+    }
+
+    // Hash Router Listener
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '') || 'home';
+      const validViews = ['home', 'auroville', 'cpc', 'iaim', 'interlude'];
+      if (validViews.includes(hash)) {
+        navigateTo(hash);
+      } else {
+        navigateTo('home');
+      }
+    });
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      initCardDeck();
+      const initialHash = window.location.hash.replace('#', '') || 'home';
+      navigateTo(initialHash);
+    });
+  </script>
+</body>
+</html>
